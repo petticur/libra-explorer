@@ -136,8 +136,12 @@ export const useCirculatingSupply = (): Money | undefined => {
         circulatingSupply: parseFloat(supplyStats[4] as string) / 1e6,
       }
 
+      // See: https://github.com/0LNetworkCommunity/explorer/issues/96
+      const communityWalletLoanAccrual = 4.14412e+8
+      const adjustedCirculatingSupply = supplyInfo.circulatingSupply + communityWalletLoanAccrual
+
       setValue({
-        amount: supplyInfo.circulatingSupply,
+        amount: adjustedCirculatingSupply,
         symbol: "LIBRA",
       });
     };
